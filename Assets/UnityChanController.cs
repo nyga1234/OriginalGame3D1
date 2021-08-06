@@ -10,7 +10,7 @@ public class UnityChanController : MonoBehaviour
     //Unityちゃんを移動させるコンポーネントを入れる
     private Rigidbody myRigidbody;
     //前方向の速度
-    private float velocityz = 8f;
+    private float velocityZ = 8f;
     //横方向の速度
     private float velocityX = 3f;
     //上方向の速度
@@ -21,6 +21,10 @@ public class UnityChanController : MonoBehaviour
     private float coefficient = 0.99f;
     //ゲーム終了の判定
     private bool isEnd = false;
+    //走った距離
+    private float len = 0;
+    //走る速度
+    private float speed = 5f;
     //ゲーム終了時に表示するテキスト（追加）
     //private GameObject stateText;
 
@@ -44,10 +48,18 @@ public class UnityChanController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ゲーム終了ならUnityちゃんの動きを減衰する（追加）
+        //走った距離を更新する
+        this.len += this.speed * Time.deltaTime;
+
+        //走った距離に応じてUnityちゃんが速くなる
+        if (this.len > 20)
+        {
+            velocityZ = 10f;
+        }
+        //ゲーム終了ならUnityちゃんの動きを減衰する
         if(this.isEnd)
         {
-            this.velocityz *= this.coefficient;
+            this.velocityZ *= this.coefficient;
             this.velocityX *= this.coefficient;
             this.velocityY *= this.coefficient;
             this.myAnimator.speed *= this.coefficient;
@@ -90,13 +102,13 @@ public class UnityChanController : MonoBehaviour
             this.myAnimator.SetBool("Jump", false);
         }
         //Unityちゃんに速度を与える
-        this.myRigidbody.velocity = new Vector3(inputVelocityX, inputVelocityY, velocityz);
+        this.myRigidbody.velocity = new Vector3(inputVelocityX, inputVelocityY, velocityZ);
     }
 
     //トリガーモードで他のオブジェクトと接触した場合の処理（追加）
     void OnTriggerEnter(Collider collider)
     {
-        //障害物に衝突した場合（追加）
+        //障害物に衝突した場合
         if (collider.gameObject.tag == "CubeTag")
         {
             this.isEnd = true;

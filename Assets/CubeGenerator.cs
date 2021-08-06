@@ -22,25 +22,65 @@ public class CubeGenerator : MonoBehaviour
     private float spaceZ = 0.4f;
 
     //キューブを出すX方向の範囲
-    private float posRange = 1f;
+    private float posRangeX = 1f;
+    //キューブを出すY方向の範囲
+    private float posRangeY = 0.5f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //一定の距離ごとにアイテムを生成
+        //一定の距離ごとにキューブを生成
         for (int i = 10; i < 10000; i += 30)
         {
-            //レーンごとにアイテムを生成
-            for (int j = -1; j <= 1; j++)
+            //どのレーンにキューブを出すのかをランダムに設定
+            int num = Random.Range(-1, 1);
+            if (num == -1)
             {
-                
-                    //キューブを生成
-                    GameObject go = Instantiate(cubePrefab);
-                    go.transform.position = new Vector3(posRange * j, go.transform.position.y, i + offsetZ);
-                
+                //真ん中と右にキューブを生成
+                for (int j = 0; j <= 1; j++)
+                {
+                    //縦にキューブを生成
+                    for (int k = 1; k <= 3; k++)
+                    {
+                        //キューブを生成
+                        GameObject go = Instantiate(cubePrefab);
+                        go.transform.position = new Vector3(posRangeX * j, posRangeY * k, i + offsetZ);
+                    }
+                }
+            }
+            if (num == 0)
+            {
+                //左と右にキューブを生成
+                for (int j = -1; j <= 1; j++)
+                {
+                    //縦にキューブを生成
+                    for (int k = 1; k <= 3; k++)
+                    {
+                        //キューブを生成
+                        GameObject go = Instantiate(cubePrefab);
+                        go.transform.position = new Vector3(posRangeX * j, posRangeY * k, i + offsetZ);
+                    }
+                }
+            }
+            if (num == 1)
+            {
+                //左と真ん中にキューブを生成
+                for (int j = -1; j <= 0; j++)
+                {
+                    //縦にキューブを生成
+                    for (int k = 1; k <= 3; k++)
+                    {
+                        //キューブを生成
+                        GameObject go = Instantiate(cubePrefab);
+                        go.transform.position = new Vector3(posRangeX * j, posRangeY * k, i + offsetZ);
+                    }
+                }
             }
         }
+
+            
+       
     }
 
     // Update is called once per frame
