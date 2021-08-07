@@ -25,8 +25,6 @@ public class UnityChanController : MonoBehaviour
     private float len = 0;
     //走る速度
     private float speed = 5f;
-    //ゲーム終了時に表示するテキスト（追加）
-    //private GameObject stateText;
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +36,7 @@ public class UnityChanController : MonoBehaviour
         this.myAnimator.SetFloat("Speed", 1);
 
         //Rigidbodyコンポーネントを取得
-        this.myRigidbody = GetComponent<Rigidbody>();
-
-        //シーン中のstateTextオブジェクトを取得（追加）
-        //this.stateText = GameObject.Find("GameResultText");
-        
+        this.myRigidbody = GetComponent<Rigidbody>();        
     }
 
     // Update is called once per frame

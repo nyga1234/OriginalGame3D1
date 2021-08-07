@@ -34,8 +34,8 @@ public class CubeGenerator : MonoBehaviour
         for (int i = 10; i < 10000; i += 30)
         {
             //どのレーンにキューブを出すのかをランダムに設定
-            int num = Random.Range(-1, 1);
-            if (num == -1)
+            int num = Random.Range(0, 2);
+            if (num == 0)
             {
                 //真ん中と右にキューブを生成
                 for (int j = 0; j <= 1; j++)
@@ -49,13 +49,13 @@ public class CubeGenerator : MonoBehaviour
                     }
                 }
             }
-            if (num == 0)
+            if (num == 1)
             {
                 //左と右にキューブを生成
                 for (int j = -1; j <= 1; j++)
                 {
                     //縦にキューブを生成
-                    for (int k = 1; k <= 3; k++)
+                    for (int k = 1; k <= 2; k++)
                     {
                         //キューブを生成
                         GameObject go = Instantiate(cubePrefab);
@@ -63,13 +63,13 @@ public class CubeGenerator : MonoBehaviour
                     }
                 }
             }
-            if (num == 1)
+            if (num == 2)
             {
                 //左と真ん中にキューブを生成
                 for (int j = -1; j <= 0; j++)
                 {
                     //縦にキューブを生成
-                    for (int k = 1; k <= 3; k++)
+                    for (int k = 1; k <= 1; k++)
                     {
                         //キューブを生成
                         GameObject go = Instantiate(cubePrefab);
