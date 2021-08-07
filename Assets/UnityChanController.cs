@@ -25,6 +25,8 @@ public class UnityChanController : MonoBehaviour
     private float len = 0;
     //走る速度
     private float speed = 5f;
+    //地面の位置
+    private float groundLevel = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,10 +50,46 @@ public class UnityChanController : MonoBehaviour
         //走った距離に応じてUnityちゃんが速くなる
         if (this.len > 20)
         {
-            velocityZ = 10f;
+            velocityZ = 12f;
+        }
+        if (this.len > 40)
+        {
+            velocityZ = 16f;
+        }
+        if (this.len > 60)
+        {
+            velocityZ = 20f;
+        }
+        if (this.len > 80)
+        {
+            velocityZ = 24f;
+        }
+        if (this.len > 100)
+        {
+            velocityZ = 28f;
+        }
+        if (this.len > 120)
+        {
+            velocityZ = 32f;
+        }
+        if (this.len > 140)
+        {
+            velocityZ = 36f;
+        }
+        if (this.len > 160)
+        {
+            velocityZ = 40f;
+        }
+        if (this.len > 180)
+        {
+            velocityZ = 44f;
+        }
+        if (this.len > 200)
+        {
+            velocityZ = 48f;
         }
         //ゲーム終了ならUnityちゃんの動きを減衰する
-        if(this.isEnd)
+        if (this.isEnd)
         {
             this.velocityZ *= this.coefficient;
             this.velocityX *= this.coefficient;
@@ -97,6 +135,12 @@ public class UnityChanController : MonoBehaviour
         }
         //Unityちゃんに速度を与える
         this.myRigidbody.velocity = new Vector3(inputVelocityX, inputVelocityY, velocityZ);
+
+        //着地しているかどうかを調べる
+        bool isGround = (transform.position.y > this.groundLevel) ? false : true;
+        this.myAnimator.SetBool("isGround", isGround);
+        //ジャンプ状態のときにはボリュームを0にする
+        GetComponent<AudioSource>().volume = (isGround) ? 1 : 0;
     }
 
     //トリガーモードで他のオブジェクトと接触した場合の処理（追加）
@@ -108,6 +152,8 @@ public class UnityChanController : MonoBehaviour
             this.isEnd = true;
             //UIControllerのGameOver関数を呼び出して画面上に「GameOver」と表示する
             GameObject.Find("Canvas").GetComponent<UIController>().GameOver();
+            //gameover状態のときにはボリュームを0にする
+            GetComponent<AudioSource>().volume = 0;
         }
     }
 }

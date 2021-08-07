@@ -41,7 +41,7 @@ public class CubeGenerator : MonoBehaviour
                 for (int j = 0; j <= 1; j++)
                 {
                     //縦にキューブを生成
-                    for (int k = 1; k <= 3; k++)
+                    for (int k = 1; k <= 4; k++)
                     {
                         //キューブを生成
                         GameObject go = Instantiate(cubePrefab);
@@ -54,8 +54,13 @@ public class CubeGenerator : MonoBehaviour
                 //左と右にキューブを生成
                 for (int j = -1; j <= 1; j++)
                 {
+                    if (j == 0)
+                    {
+                        continue;
+                    }
+
                     //縦にキューブを生成
-                    for (int k = 1; k <= 2; k++)
+                    for (int k = 1; k <= 4; k++)
                     {
                         //キューブを生成
                         GameObject go = Instantiate(cubePrefab);
@@ -69,7 +74,7 @@ public class CubeGenerator : MonoBehaviour
                 for (int j = -1; j <= 0; j++)
                 {
                     //縦にキューブを生成
-                    for (int k = 1; k <= 1; k++)
+                    for (int k = 1; k <= 4; k++)
                     {
                         //キューブを生成
                         GameObject go = Instantiate(cubePrefab);
