@@ -27,6 +27,8 @@ public class UnityChanController : MonoBehaviour
     private float speed = 5f;
     //地面の位置
     private float groundLevel = 0f;
+    //左ボタン押下の判定（追加）
+    private bool isLButtonDown = false;
 
     // Start is called before the first frame update
     void Start()
